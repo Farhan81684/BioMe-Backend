@@ -14,6 +14,7 @@ const app = express();
 // ✅ Allowed domains
 const allowedOrigins = [
   "http://localhost:8080",
+  "http://192.168.18.24:8080",
   "https://biomelc.com",
   "https://chat.biomelc.com"
 ];
@@ -57,8 +58,6 @@ app.use("/api/users", userRoutes);
 app.use("/api", chatRoutes);
 app.use("/api/social-login", socialRoutes);
 
-// ❌ REMOVE ALL app.options / wildcard routes
-// Do NOT add app.options("*") or app.options("/*")
 
 // ✅ Start
 (async () => {

@@ -219,7 +219,7 @@ exports.addMessage = async (req, res) => {
     // 7️⃣ Save unanswered query if AI fallback message triggered
     if (
       aiText.includes(
-        "I could not find any information or explanation related to your question"
+        "I'm sorry, I don't yet have the knowledge to answer this question."
       )
     ) {
       await UnansweredQuery.create({ message: content });
