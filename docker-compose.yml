@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # Database Mysql service
+  db:
+    image: mysql:8.0
+    container_name: biome-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MyNewStrongPass123!
+      MYSQL_DATABASE: BiomeAI
+    ports:
+      - "3306:3306"
+
+  # Backend service
+  backend:
+    image: farhanraju/biome-backend:latest
+    container_name: biome-backend-app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=MyNewStrongPass123!
+      - DB_NAME=BiomeAI
+      - PORT=3000
+      - JWT_SECRET=HubaixBiome
