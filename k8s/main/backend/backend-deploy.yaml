@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-main
+  namespace: main
+  labels:
+    app: backend
+    env: main  
+spec:
+  replicas: 2   
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: farhanraju/biome-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        resources: 
+          requests:
+            memory: "128Mi"
+            cpu: "100m"  
+          limits:
+            memory: "256Mi"
+            cpu: "200m" 
+        env:
+        # Data from ConfigMap
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_HOST
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_NAME
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_USER
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: PORT
+        # Data from Secret
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: db-pass
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: jwt-secret
