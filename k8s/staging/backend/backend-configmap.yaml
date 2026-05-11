@@ -8,3 +8,9 @@ data:
   DB_NAME: "BiomeAI"
   DB_USER: "root"
   PORT: "3000"
+  # Social Login Variables 
+  FACEBOOK_APP_ID: "123456789" 
+  FACEBOOK_APP_SECRET: "dummy_secret_123"
+  GOOGLE_CLIENT_ID: "987654321"
+  GOOGLE_CLIENT_SECRET: "dummy_secret_456"
+  BE_URL: "http://biome-staging.com/"
