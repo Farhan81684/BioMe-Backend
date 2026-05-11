@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-main
+  name: backend-main 
   namespace: main
   labels:
     app: backend
-    env: main  
+    env: main
 spec:
-  replicas: 2   
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -29,29 +29,12 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m" 
+        # ConfigMap se saare variables aik saath load karne ke liye
+        envFrom:
+        - configMapRef:
+            name: backend-config
+        # Individual Secrets load karne ke liye
         env:
-        # Data from ConfigMap
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: DB_HOST
-        - name: DB_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: DB_NAME
-        - name: DB_USER
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: DB_USER
-        - name: PORT
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: PORT
-        # Data from Secret
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
