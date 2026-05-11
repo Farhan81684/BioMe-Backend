@@ -38,7 +38,7 @@ pipeline {
                     // Ye logic decide karega ke staging namespace mein deploy karna hai ya main mein
                     def targetNamespace = (env.BRANCH_NAME == 'main') ? 'main' : 'staging'
                     def targetFolder = (env.BRANCH_NAME == 'main') ? 'k8s/main/backend' : 'k8s/staging/backend'
-                    def deployName = (env.BRANCH_NAME == 'main') ? 'backend-main' : 'backend-deploy'
+                    def deployName = (env.BRANCH_NAME == 'main') ? 'backend-main' : 'backend-staging'
 
                     withKubeConfig([credentialsId: "${K8S_CRED}"]) {
                         // Deployment file mein image tag update karna
