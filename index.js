@@ -50,7 +50,7 @@ app.use("/uploads", express.static("uploads"));
 // ✅ Test Route
 app.get("/", (req, res) => {
   console.log("Origin:", req.headers.origin);
-  res.send("🚀 Node + Express + MySQL is running!");
+  res.send("🚀 wellcome Farhan Node + Express + MySQL is running!");
 });
 
 // ✅ API Routes
